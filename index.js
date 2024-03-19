@@ -1,27 +1,40 @@
 // set perspective. also set in css right now
 var currentPerspective = 1300;
 
+
+var isExpanded = false;
+
 document.querySelector('.image-container').addEventListener('click', function() {
     this.classList.toggle("expanded");
-    translateImages()
+    translateImages();
 });
 
+document.getElementById("slides-button").addEventListener("click", function() {
+    toggleView();
+});
+
+
 // this sets images apart from each other on load
-function translateImages() {
+async function translateImages() {
     var images = document.getElementsByTagName('img');
     var translateZ = 0;
     var translateY = 0;
     var translateX = 0;
 
+    const expanded = document.querySelector('.image-container').classList.contains("expanded");        
+
     for (var i = 0; i < images.length; i++) {
         images[i].style.transform = 'translate3d(' + translateX + 'px,' + translateY + 'px, ' + translateZ + 'px)';
-        translateZ -= 200; // You can adjust the amount of translation according to your preference
+        translateZ -= 250; // You can adjust the amount of translation according to your preference
 
-        if (document.querySelector('.image-container').classList.contains("expanded")) {
-            translateY += 50; // You can adjust the amount of translation according to your 
-            translateX += 50; // You can adjust the amount of translation according to your 
-        }
+        if (expanded) {
+            translateY += 50; // You can adjust the amount of translation according to your preference
+            translateX += 50;
+        } 
     }
+    var slidesButton = document.getElementById('slides-button'); 
+    slidesButton.style.display = expanded ? 'none' : 'block';
+    toggleBlurredBackground();
 }
 
 
@@ -57,6 +70,7 @@ function handleMouseWheel(event) {
     event.preventDefault();
 }
 
+
 var isGridDisplayed = false;
 var imageContainer = document.querySelector('.image-container');
 var gridContainer = document.querySelector('.grid-container');
@@ -83,6 +97,8 @@ function toggleView() {
         });
     }
 
+    document.getElementById("slides-button").innerText = isGridDisplayed ? "Display Slides" : "View Tunnel Book";
+    toggleBlurredBackground();
     isGridDisplayed = !isGridDisplayed;
 }
 
@@ -90,7 +106,16 @@ function hideContainer() {
     imageContainer.style.display = 'none';
 }
 
-// Event listeners
+
+function toggleBlurredBackground() {
+    var bg = document.querySelector(".background-image");
+    const bgImg = `url('${ document.getElementById("bg").src}')`;
+
+    bg.style.backgroundImage = bg.style.backgroundImage == '' ? bgImg : '';
+}
+
+// Add event listeners
 window.onload = translateImages;
 document.querySelector('.image-container').addEventListener('mousemove', handleMouseMove);
 window.addEventListener('wheel', handleMouseWheel);
+
