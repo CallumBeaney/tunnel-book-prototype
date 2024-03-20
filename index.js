@@ -117,17 +117,12 @@ function toggleBlurredBackground() {
     bg.style.backgroundImage = bg.style.backgroundImage == '' ? bgImg : '';
 }
 
-
-
-/// TODO: Abbey -- maybe we could do this. what do you think, is it too cursed?
-// must load in reverse order of display
 const imagePaths = [
-    "images/peepshow_12.png", 
+    "images/peepshow_5.png", 
     "images/peepshow_4.png", 
     "images/peepshow_3.png", 
     "images/peepshow_2.png", 
     "images/peepshow_1.png", 
-    // "images/peepshow_5.png", 
 ];
 const backgroundPath = "images/peepshow_bg.png";
 
