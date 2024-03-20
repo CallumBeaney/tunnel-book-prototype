@@ -2,8 +2,6 @@
 var currentPerspective = 1300;
 
 
-var isExpanded = false;
-
 document.querySelector('.image-container').addEventListener('click', function() {
     this.classList.toggle("expanded");
     translateImages();
@@ -14,8 +12,9 @@ document.getElementById("slides-button").addEventListener("click", function() {
 });
 
 
+
 // this sets images apart from each other on load
-async function translateImages() {
+function translateImages() {
     var images = document.getElementsByTagName('img');
     var translateZ = 0;
     var translateY = 0;
@@ -24,7 +23,6 @@ async function translateImages() {
     const expanded = document.querySelector('.image-container').classList.contains("expanded");        
 
     for (var i = 0; i < images.length; i++) {
-        images[i].display = 'none';
         images[i].style.transform = 'translate3d(' + translateX + 'px,' + translateY + 'px, ' + translateZ + 'px)';
         translateZ -= 250; // You can adjust the amount of translation according to your preference
         if (expanded) {
@@ -33,14 +31,11 @@ async function translateImages() {
         } 
     }
 
-    for (var i = 0; i < images.length; i++) {
-        images[i].display = 'block';
-    }
-
     var slidesButton = document.getElementById('slides-button'); 
     slidesButton.style.display = expanded ? 'none' : 'block';
     toggleBlurredBackground();
 }
+
 
 
 function handleMouseMove(event) {
@@ -76,6 +71,7 @@ function handleMouseWheel(event) {
 }
 
 
+
 var isGridDisplayed = false;
 var imageContainer = document.querySelector('.image-container');
 var gridContainer = document.querySelector('.grid-container');
@@ -107,9 +103,11 @@ function toggleView() {
     isGridDisplayed = !isGridDisplayed;
 }
 
+
 function hideContainer() {
     imageContainer.style.display = 'none';
 }
+
 
 
 function toggleBlurredBackground() {
@@ -120,8 +118,9 @@ function toggleBlurredBackground() {
 }
 
 
+
 /// TODO: Abbey -- maybe we could do this. what do you think, is it too cursed?
-// must load in reverse order of displa
+// must load in reverse order of display
 const imagePaths = [
     "images/peepshow_12.png", 
     "images/peepshow_4.png", 

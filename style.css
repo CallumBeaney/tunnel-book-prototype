@@ -23,7 +23,6 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(45px) contrast(110%) brightness(70%) saturate(120%);
-    /* background-image: none; */
 }
 
 
