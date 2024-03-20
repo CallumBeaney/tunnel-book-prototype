@@ -1,10 +1,17 @@
 // set perspective. also set in css right now
 var currentPerspective = 1300;
 
+
 document.querySelector('.image-container').addEventListener('click', function() {
     this.classList.toggle("expanded");
-    translateImages()
+    translateImages();
 });
+
+document.getElementById("slides-button").addEventListener("click", function() {
+    toggleView();
+});
+
+
 
 // this sets images apart from each other on load
 function translateImages() {
@@ -13,16 +20,22 @@ function translateImages() {
     var translateY = 0;
     var translateX = 0;
 
+    const expanded = document.querySelector('.image-container').classList.contains("expanded");        
+
     for (var i = 0; i < images.length; i++) {
         images[i].style.transform = 'translate3d(' + translateX + 'px,' + translateY + 'px, ' + translateZ + 'px)';
-        translateZ -= 200; // You can adjust the amount of translation according to your preference
-
-        if (document.querySelector('.image-container').classList.contains("expanded")) {
-            translateY += 50; // You can adjust the amount of translation according to your 
-            translateX += 50; // You can adjust the amount of translation according to your 
-        }
+        translateZ -= 250; // You can adjust the amount of translation according to your preference
+        if (expanded) {
+            translateY += 50; // You can adjust the amount of translation according to your preference
+            translateX += 50;
+        } 
     }
+
+    var slidesButton = document.getElementById('slides-button'); 
+    slidesButton.style.display = expanded ? 'none' : 'block';
+    toggleBlurredBackground();
 }
+
 
 
 function handleMouseMove(event) {
@@ -57,10 +70,12 @@ function handleMouseWheel(event) {
     event.preventDefault();
 }
 
+
+
 var isGridDisplayed = false;
 var imageContainer = document.querySelector('.image-container');
 var gridContainer = document.querySelector('.grid-container');
-var gridImages = document.querySelectorAll('.grid-container img');
+var gridImages;
 
 function toggleView() {
     if (!isGridDisplayed) {
@@ -83,14 +98,48 @@ function toggleView() {
         });
     }
 
+    document.getElementById("slides-button").innerText = isGridDisplayed ? "Display Slides" : "View Tunnel Book";
+    toggleBlurredBackground();
     isGridDisplayed = !isGridDisplayed;
 }
+
 
 function hideContainer() {
     imageContainer.style.display = 'none';
 }
 
-// Event listeners
-window.onload = translateImages;
-document.querySelector('.image-container').addEventListener('mousemove', handleMouseMove);
+
+
+function toggleBlurredBackground() {
+    var bg = document.querySelector(".background-image");
+    const bgImg = `url('${ document.getElementById("bg").src}')`;
+
+    bg.style.backgroundImage = bg.style.backgroundImage == '' ? bgImg : '';
+}
+
+const imagePaths = [
+    "images/peepshow_5.png", 
+    "images/peepshow_4.png", 
+    "images/peepshow_3.png", 
+    "images/peepshow_2.png", 
+    "images/peepshow_1.png", 
+];
+const backgroundPath = "images/peepshow_bg.png";
+
+function injectImages(className) {
+    let builder = "";
+    for (var path of imagePaths) builder += '<img src="' + path + '">';
+    builder += '<img src="' + backgroundPath + '" id="bg">';
+    document.querySelector(className).insertAdjacentHTML("beforeend", builder);
+}
+
+
+// setup
+window.onload = injectImages(".image-container");
+translateImages();
+
 window.addEventListener('wheel', handleMouseWheel);
+document.querySelector('.image-container').addEventListener('mousemove', handleMouseMove);
+
+injectImages(".grid-container");
+gridImages = document.querySelectorAll('.grid-container img');
