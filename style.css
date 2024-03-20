@@ -35,6 +35,7 @@ body, html {
     perspective: 1300px; 
     perspective-origin: 50% 50%;
     position: relative;
+    cursor: crosshair;
 }
   
 .image-container img {

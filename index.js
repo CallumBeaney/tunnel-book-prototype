@@ -24,14 +24,19 @@ async function translateImages() {
     const expanded = document.querySelector('.image-container').classList.contains("expanded");        
 
     for (var i = 0; i < images.length; i++) {
+        images[i].display = 'none';
         images[i].style.transform = 'translate3d(' + translateX + 'px,' + translateY + 'px, ' + translateZ + 'px)';
         translateZ -= 250; // You can adjust the amount of translation according to your preference
-
         if (expanded) {
             translateY += 50; // You can adjust the amount of translation according to your preference
             translateX += 50;
         } 
     }
+
+    for (var i = 0; i < images.length; i++) {
+        images[i].display = 'block';
+    }
+
     var slidesButton = document.getElementById('slides-button'); 
     slidesButton.style.display = expanded ? 'none' : 'block';
     toggleBlurredBackground();
@@ -74,7 +79,7 @@ function handleMouseWheel(event) {
 var isGridDisplayed = false;
 var imageContainer = document.querySelector('.image-container');
 var gridContainer = document.querySelector('.grid-container');
-var gridImages = document.querySelectorAll('.grid-container img');
+var gridImages;
 
 function toggleView() {
     if (!isGridDisplayed) {
@@ -114,8 +119,33 @@ function toggleBlurredBackground() {
     bg.style.backgroundImage = bg.style.backgroundImage == '' ? bgImg : '';
 }
 
-// Add event listeners
-window.onload = translateImages;
-document.querySelector('.image-container').addEventListener('mousemove', handleMouseMove);
-window.addEventListener('wheel', handleMouseWheel);
 
+/// TODO: Abbey -- maybe we could do this. what do you think, is it too cursed?
+// must load in reverse order of displa
+const imagePaths = [
+    "images/peepshow_12.png", 
+    "images/peepshow_4.png", 
+    "images/peepshow_3.png", 
+    "images/peepshow_2.png", 
+    "images/peepshow_1.png", 
+    // "images/peepshow_5.png", 
+];
+const backgroundPath = "images/peepshow_bg.png";
+
+function injectImages(className) {
+    let builder = "";
+    for (var path of imagePaths) builder += '<img src="' + path + '">';
+    builder += '<img src="' + backgroundPath + '" id="bg">';
+    document.querySelector(className).insertAdjacentHTML("beforeend", builder);
+}
+
+
+// setup
+window.onload = injectImages(".image-container");
+translateImages();
+
+window.addEventListener('wheel', handleMouseWheel);
+document.querySelector('.image-container').addEventListener('mousemove', handleMouseMove);
+
+injectImages(".grid-container");
+gridImages = document.querySelectorAll('.grid-container img');
