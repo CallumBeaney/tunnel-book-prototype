@@ -35,6 +35,8 @@ body, html {
     perspective-origin: 50% 50%;
     position: relative;
     cursor: crosshair;
+    /* aspect-ratio: 16/9; */
+
 }
   
 .image-container img {
@@ -43,6 +45,7 @@ body, html {
     border-radius: 20px;
     position: absolute;
     transition: transform 0.5s ease-in-out;
+    object-fit: contain
 }
 
 
@@ -100,7 +103,7 @@ body, html {
 .button-container {
   display: flex;
   gap: 10px;
-  margin: 4px;
+  margin: 5px;
   position: relative;
   justify-content: space-between;
 }
@@ -109,10 +112,10 @@ button {
     display: block;
     background-color: #21150f;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     color: white;
-    font-size: 12px;
-    padding: 8px 12px;
+    font-size: 10px;
+    padding: 8px 10px;
     transition: all .4s;
     cursor: pointer;
 }

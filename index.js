@@ -173,6 +173,18 @@ function swapImages() {
   // Refresh necessary elements
   gridImages = document.querySelectorAll('.grid-container img');
   translateImages();
+
+  const bookInfoButton = document.getElementById('book-info');
+  if (!useOldImages) {
+    bookInfoButton.textContent = "Franz Bonn's 'The Children's Theatre'";
+    bookInfoButton.style.fontSize = '9px';
+  } else {
+    bookInfoButton.textContent = "The Dance of the Tunnel Book";
+    bookInfoButton.style.fontSize = '9px';
+    bookInfoButton.onclick = function() {
+      window.open('https://library.si.edu/digital-library/exhibition/paper-engineering/dance-tunnel-book', '_blank');
+    };
+  }
 }
 
 
