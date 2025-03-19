@@ -178,7 +178,7 @@ function swapImages() {
 
 // setup
 window.onload = function () {
-  // Initialize buttons
+  // buttons
   document.getElementById("click-button").addEventListener("click", function () {
     const container = document.querySelector('.image-container');
     container.classList.toggle("expanded");
@@ -193,6 +193,7 @@ window.onload = function () {
   });
 
 
+  // hardware
   window.addEventListener('wheel', handleMouseWheel);
 
   document.querySelector('.image-container').addEventListener('mousemove', handleMouseMove);
@@ -205,6 +206,7 @@ window.onload = function () {
 
   document.addEventListener('keydown', spacebarListener);
 
+  // load images
   swapImages();
   toggleBlurredBackground();
 };
