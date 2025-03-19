@@ -118,13 +118,13 @@ function toggleBlurredBackground() {
 }
 
 const imagePaths = [
-    "images/peepshow_5.png", 
-    "images/peepshow_4.png", 
-    "images/peepshow_3.png", 
-    "images/peepshow_2.png", 
-    "images/peepshow_1.png", 
+  // "newImages/1.png", 
+  "newImages/2.png", 
+  "newImages/3.png", 
+  "newImages/4.png", 
+  "newImages/5.png", 
 ];
-const backgroundPath = "images/peepshow_bg.png";
+const backgroundPath = "newImages/back.png";
 
 function injectImages(className) {
     let builder = "";
