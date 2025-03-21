@@ -195,7 +195,7 @@ window.onload = function () {
     const container = document.querySelector('.image-container');
     container.classList.toggle("expanded");
     translateImages();
-    toggleBlurredBackground();
+    // toggleBlurredBackground();
   });
   document.getElementById("space-button").addEventListener("click", function () {
     swapImages();
@@ -213,12 +213,12 @@ window.onload = function () {
   document.querySelector('.image-container').addEventListener('click', function () {
     this.classList.toggle("expanded");
     translateImages();
-    toggleBlurredBackground();
+    // toggleBlurredBackground();
   });
 
   document.addEventListener('keydown', spacebarListener);
 
   // load images
   swapImages();
-  toggleBlurredBackground();
+  // toggleBlurredBackground();
 };
