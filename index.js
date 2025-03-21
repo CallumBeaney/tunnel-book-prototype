@@ -112,7 +112,7 @@ function showPerspectiveView() {
 
 function toggleView() {
   isGridDisplayed ? showPerspectiveView() : showGridView();
-  toggleBlurredBackground();
+  // toggleBlurredBackground();
 
   document.getElementById("slides-button").innerText = isGridDisplayed ? "Display Slides" : "View Tunnel Book";
   
